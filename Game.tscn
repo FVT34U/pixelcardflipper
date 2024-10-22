@@ -1,0 +1,104 @@
+[gd_scene load_steps=3 format=3 uid="uid://cld3iibouhm21"]
+
+[ext_resource type="Script" path="res://game_controller.gd" id="1_fdg30"]
+[ext_resource type="Script" path="res://ui_controller.gd" id="1_h4h0r"]
+
+[node name="UI" type="Control" node_paths=PackedStringArray("game_controller")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h4h0r")
+game_controller = NodePath("GameController")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "назад"
+
+[node name="Button2" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "звук выкл"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "ВРЕМЯ"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Minutes" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "00"
+horizontal_alignment = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = ":"
+horizontal_alignment = 1
+
+[node name="Seconds" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "00"
+
+[node name="Control3" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Grid" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 5
+
+[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GameController" type="Node" parent="." node_paths=PackedStringArray("timer", "sec_timer", "ui")]
+script = ExtResource("1_fdg30")
+time = 90
+timer = NodePath("../LevelTimer")
+sec_timer = NodePath("../SecondsTimer")
+ui = NodePath("..")
+
+[node name="LevelTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SecondsTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="LevelTimer" to="GameController" method="_on_level_timer_timeout"]
+[connection signal="timeout" from="SecondsTimer" to="GameController" method="_on_seconds_timer_timeout"]
