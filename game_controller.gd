@@ -35,10 +35,12 @@ func _ready():
 func _on_card_choosed(card: Card):
 	print(card.id)
 	
-	if chosen_cards.size() <= GameProperties.num_of_cards_to_open:
+	if chosen_cards.size() < GameProperties.num_of_cards_to_open - 1:
 		chosen_cards.append(card)
 		return
-
+	
+	chosen_cards.append(card)
+	
 	var primary_id = chosen_cards[0].id
 	var failed = false
 	
@@ -48,7 +50,7 @@ func _on_card_choosed(card: Card):
 	
 	if not failed:
 		for c in chosen_cards:
-			c.queue_free()
+			c.disabled = true
 	
 	chosen_cards.clear()
 
