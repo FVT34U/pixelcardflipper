@@ -36,3 +36,7 @@ func _on_time_changed(time_remain: int):
 	
 	%Minutes.set_text(minutes)
 	%Seconds.set_text(seconds)
+
+
+func _on_btn_back_pressed() -> void:
+	get_tree().quit()

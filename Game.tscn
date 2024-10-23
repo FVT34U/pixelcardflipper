@@ -36,7 +36,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+[node name="BtnBack" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "назад"
 
@@ -80,9 +80,10 @@ size_flags_horizontal = 3
 [node name="Grid" type="GridContainer" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 10
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
 columns = 5
 
 [node name="Control2" type="Control" parent="MarginContainer/VBoxContainer"]
@@ -100,5 +101,6 @@ one_shot = true
 
 [node name="SecondsTimer" type="Timer" parent="."]
 
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/BtnBack" to="." method="_on_btn_back_pressed"]
 [connection signal="timeout" from="LevelTimer" to="GameController" method="_on_level_timer_timeout"]
 [connection signal="timeout" from="SecondsTimer" to="GameController" method="_on_seconds_timer_timeout"]
